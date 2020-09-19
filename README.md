@@ -5,7 +5,7 @@ This is the implementation of [Knowledge Distillation for Multi-task Learning](h
 <figure class="image">
   <img src="./figure/diagram.jpg">
   <figcaption>Figure 1. Diagram of our method. We first train a task-specific model for each task in an offline stage and freeze their parameters (i.e. (a), (c)). We then optimize the parameters of the multi-task network for minimizing a sum of task-specific losses and also for producing similar features with the single-task networks (i.e. (b)).</figcaption>
-</figure><br/>
+</figure>
 
 ## Requirements
 - Python 3.6+
