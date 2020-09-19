@@ -2,7 +2,10 @@
 This is the implementation of [Knowledge Distillation for Multi-task Learning](https://arxiv.org/pdf/2007.06889.pdf) introduced by [Wei-Hong Li](https://weihonglee.github.io) and [Hakan Bilen](http://homepages.inf.ed.ac.uk/hbilen/index.html). We provide code for our method that performs semantic segmentation, depth estimation and surface normal estimation on NYU-v2 dataset using SegNet and MTAN. The repository also contains code for baselines which are compared in our paper. All methods are implemented in Pytorch
 
 
-<center><img src="./figure/diagram.jpg"></center>
+<figure class="image">
+  <img src="./figure/diagram.jpg">
+  <figcaption>Figure 1. Diagram of our method. We first train a task-specific model for each task in an offline stage and freeze their parameters (i.e. (a), (c)). We then optimize the parameters of the multi-task network for minimizing a sum of task-specific losses and also for producing similar features with the single-task networks (i.e. (b)).</figcaption>
+</figure>
 
 ## Requirements
 - Python 3.6+
