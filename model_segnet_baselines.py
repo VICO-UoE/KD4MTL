@@ -26,7 +26,7 @@ parser.add_argument('--temp', default=1.0, type=float, help='temperature for DWA
 parser.add_argument('--gpu', default='0', type=str, help='id(s) for CUDA_VISIBLE_DEVICES')
 parser.add_argument('--wlr', default=0.001, type=float, help='initial learning rate')
 parser.add_argument('--out', default='result', help='Directory to output the result')
-parser.add_argument('--alpha', default=0.12, type=float, help='hyper params of GradNorm')
+parser.add_argument('--alpha', default=1.5, type=float, help='hyper params of GradNorm')
 opt = parser.parse_args()
 
 tasks = ['semantic', 'depth', 'normal']
@@ -140,8 +140,9 @@ for epoch in range(total_epoch):
                 w[i] = float(sol[i])
         if opt.weight == 'gradnorm':
             norms = []
-            W = feat[-1]
-            W.retain_grad()
+            # compute gradient w.r.t. last shared conv layer's parameters
+            W = model.conv_block_dec[0][0].weight
+
             for i, t in enumerate(tasks):
                 gygw = torch.autograd.grad(train_loss[i], W, retain_graph=True)
                 norms.append(torch.norm(torch.mul(Weights.weights[i], gygw[0])))

@@ -25,7 +25,7 @@ parser.add_argument('--dataroot', default='nyuv2', type=str, help='dataset root'
 parser.add_argument('--temp', default=2.0, type=float, help='temperature for DWA (must be positive)')
 parser.add_argument('--gpu', default='0', type=str, help='id(s) for CUDA_VISIBLE_DEVICES')
 parser.add_argument('--out', default='result', help='Directory to output the result')
-parser.add_argument('--alpha', default=0.12, type=float, help='hyper params of GradNorm')
+parser.add_argument('--alpha', default=1.5, type=float, help='hyper params of GradNorm')
 opt = parser.parse_args()
 
 class Weight(torch.nn.Module):
@@ -145,14 +145,12 @@ for epoch in range(total_epoch):
             for i in range(len(tasks)):
                 w[i] = float(sol[i])
         if opt.weight == 'gradnorm':
-            W = []
-            norms = []
-            for t_idx in range(len(tasks)):
-                W += [feat[t_idx][-1]]
-                W[t_idx].retain_grad()
+            # compute gradient w.r.t. last shared conv layer's parameters
+            W = model.conv_block_dec[0][0].weight
             for i, t in enumerate(tasks):
-                gygw = torch.autograd.grad(train_loss[i], W[i], retain_graph=True)
+                gygw = torch.autograd.grad(train_loss[i], W, retain_graph=True)
                 norms.append(torch.norm(torch.mul(Weights.weights[i], gygw[0])))
+
             norms = torch.stack(norms)
             task_loss = torch.stack(train_loss)
             if epoch ==0 and k == 0:
