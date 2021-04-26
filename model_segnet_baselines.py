@@ -127,7 +127,7 @@ for epoch in range(total_epoch):
         train_loss = model.model_fit(train_pred[0], train_label, train_pred[1], train_depth, train_pred[2], train_normal)
         loss = 0
         norms = []
-        w = torch.zeros(len(tasks)).float().cuda()
+        w = torch.ones(len(tasks)).float().cuda()
         if opt.weight == 'mgda':
             W = feat[-1]
             W.retain_grad()
