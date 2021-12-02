@@ -60,7 +60,7 @@ python model_mtan_baselines.py --gpu <gpu_id> --out baselines --dataroot ./data/
 We thank Shikun Liu and Ozan Sener for their source code of [MTAN](https://github.com/lorenmt/mtan) and [MGDA](https://github.com/intel-isl/MultiObjectiveOptimization).  
 
 ## Contact
-For any question, you can contact `w.h.li@ed.ac.uk`.
+For any question, you can contact [Wei-Hong Li](https://weihonglee.github.io).
 
 ## Citation
 If you find this code to be useful in your work and use it for a publication, please kindly cite:
