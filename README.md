@@ -7,6 +7,9 @@ This is the implementation of [Knowledge Distillation for Multi-task Learning](h
   <figcaption>Figure 1. Diagram of our method. We first train a task-specific model for each task in an offline stage and freeze their parameters (i.e. (a), (c)). We then optimize the parameters of the multi-task network for minimizing a sum of task-specific losses and also for producing similar features with the single-task networks (i.e. (b)).</figcaption>
 </figure>
 
+## Updates
+* April'23, This work has been updated with applications to multi-task dense prediction, multi-domain learning, cross-domain few-shot learning and implementation of more loss balancing strategies and multi-task/domain learning backbones. Check out our latest version: [Universal Representations](https://github.com/VICO-UoE/UniversalRepresentations) for more details!
+
 ## Requirements
 - Python 3.6+
 - PyTorch 1.0 (or newer version)
